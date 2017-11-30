@@ -54,6 +54,17 @@ const Pad = glamorous.div(
   }
 );
 
+const KeyboardKey = glamorous.kbd({
+  fontSize: '48px',
+  opacity: 1,
+  '@media(max-width: 910px)': {
+    fontSize: '36px'
+  },
+  '@media(max-width: 480px)': {
+    fontSize: '24px'
+  }
+});
+
 type Props = {
   label: string,
   id: string,
@@ -61,11 +72,13 @@ type Props = {
   handleTransitionEnd: (id: string) => void
 };
 
+// For the css style of the kbd element the text-gradient is being used from the style.css sheet because glamoroud doesn't support the background-clip property
+
 const DrumPad = (props: Props) => (
   <Column>
     <PadRing isActive={props.isActive} onTransitionEnd={() => props.handleTransitionEnd(props.id)}>
       <Pad isActive={props.isActive}>
-        <kbd className="text-gradient">{props.label}</kbd>
+        <KeyboardKey className="text-gradient">{props.label}</KeyboardKey>
       </Pad>
     </PadRing>
   </Column>

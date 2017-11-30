@@ -28,11 +28,15 @@ const DisplayArea = glamorous.div({
   opacity: 1
 });
 
+const DisplayText = glamorous.img({
+  maxWidth: '100%'
+});
+
 const Display = () => (
   <Column>
     <DisplayContainer>
       <DisplayArea>
-        <img src="/public/img/DR110.svg" alt="DR 110" />
+        <DisplayText src="/public/img/DR110.svg" alt="DR 110" />
       </DisplayArea>
     </DisplayContainer>
   </Column>
