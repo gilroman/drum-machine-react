@@ -66,6 +66,8 @@ class App extends Component<{}, State> {
       pad76isActive: false
     };
 
+    this.togglePad = this.togglePad.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
   }
 
@@ -77,54 +79,57 @@ class App extends Component<{}, State> {
       if (audio instanceof HTMLAudioElement) {
         audio.currentTime = 0;
         audio.play();
-      }
-      // set the state property corresponding to the appropriate button as active
-      switch (e.keyCode) {
-        case 65:
-          this.setState({ pad65isActive: true });
-          break;
-        case 83:
-          this.setState({ pad83isActive: true });
-          break;
-        case 68:
-          this.setState({ pad68isActive: true });
-          break;
-        case 74:
-          this.setState({ pad74isActive: true });
-          break;
-        case 75:
-          this.setState({ pad75isActive: true });
-          break;
-        case 76:
-          this.setState({ pad76isActive: true });
-          break;
-        default:
-          break;
+        this.togglePad(e.keyCode, e);
       }
     });
   }
 
+  handleClick: Function;
   handleTransitionEnd: Function;
+  togglePad: Function;
 
-  handleTransitionEnd(key): void {
-    switch (key) {
+  handleClick(key: string, e: SyntheticEvent<HTMLButtonElement>): void {
+    const audio = document.querySelector(`audio[data-key="${key}"]`);
+    if (!audio) return;
+    // set the audio file play location to the beginning of the fil
+    if (audio instanceof HTMLAudioElement) {
+      audio.currentTime = 0;
+      audio.play();
+      this.togglePad(key, e);
+    }
+  }
+
+  handleTransitionEnd(key, e: SyntheticTransitionEvent<HTMLDivElement>): void {
+    this.togglePad(key, e);
+  }
+
+  // toggle the isActive state property corresponding to the appropriate button transitionEnd defaults to false
+  togglePad(key, event): void {
+    const val = event.type === 'keydown' || event.type === 'click';
+    let keyNum = key;
+
+    if (event.type === 'keydown') {
+      keyNum = key.toString();
+    }
+
+    switch (keyNum) {
       case '65':
-        this.setState({ pad65isActive: false });
+        this.setState({ pad65isActive: val });
         break;
       case '83':
-        this.setState({ pad83isActive: false });
+        this.setState({ pad83isActive: val });
         break;
       case '68':
-        this.setState({ pad68isActive: false });
+        this.setState({ pad68isActive: val });
         break;
       case '74':
-        this.setState({ pad74isActive: false });
+        this.setState({ pad74isActive: val });
         break;
       case '75':
-        this.setState({ pad75isActive: false });
+        this.setState({ pad75isActive: val });
         break;
       case '76':
-        this.setState({ pad76isActive: false });
+        this.setState({ pad76isActive: val });
         break;
       default:
         break;
@@ -147,6 +152,7 @@ class App extends Component<{}, State> {
               padName="Kick"
               isActive={this.state.pad65isActive}
               handleTransitionEnd={this.handleTransitionEnd}
+              handleClick={this.handleClick}
             />
             <DrumPad
               key="83"
@@ -155,6 +161,7 @@ class App extends Component<{}, State> {
               padName="Snare"
               isActive={this.state.pad83isActive}
               handleTransitionEnd={this.handleTransitionEnd}
+              handleClick={this.handleClick}
             />
             <DrumPad
               key="68"
@@ -163,6 +170,7 @@ class App extends Component<{}, State> {
               padName="Open Hat"
               isActive={this.state.pad68isActive}
               handleTransitionEnd={this.handleTransitionEnd}
+              handleClick={this.handleClick}
             />
             <DrumPad
               key="74"
@@ -171,6 +179,7 @@ class App extends Component<{}, State> {
               padName="Closed Hat"
               isActive={this.state.pad74isActive}
               handleTransitionEnd={this.handleTransitionEnd}
+              handleClick={this.handleClick}
             />
             <DrumPad
               key="75"
@@ -179,6 +188,7 @@ class App extends Component<{}, State> {
               padName="Cymbal"
               isActive={this.state.pad75isActive}
               handleTransitionEnd={this.handleTransitionEnd}
+              handleClick={this.handleClick}
             />
             <DrumPad
               key="76"
@@ -187,6 +197,7 @@ class App extends Component<{}, State> {
               padName="Clap"
               isActive={this.state.pad76isActive}
               handleTransitionEnd={this.handleTransitionEnd}
+              handleClick={this.handleClick}
             />
           </Buttons>
         </MachineBody>

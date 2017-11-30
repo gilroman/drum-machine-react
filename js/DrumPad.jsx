@@ -3,6 +3,12 @@
 import React from 'react';
 import glamorous from 'glamorous';
 
+const Button = glamorous.button({
+  backgroundColor: 'transparent',
+  border: 'none',
+  ':focus': { outline: 0 }
+});
+
 const Column = glamorous.div({
   width: '14.33%',
   marginLeft: '2%',
@@ -77,19 +83,26 @@ type Props = {
   padName: string,
   id: string,
   isActive: boolean,
-  handleTransitionEnd: (id: string) => void
+  handleClick: (key: string, e: SyntheticEvent<HTMLButtonElement>) => void,
+  handleTransitionEnd: (id: string, e: SyntheticTransitionEvent<HTMLDivElement>) => void
 };
 
 // For the css style of the kbd element the text-gradient is being used from the style.css sheet because glamoroud doesn't support the background-clip property
 
 const DrumPad = (props: Props) => (
   <Column>
-    <PadRing isActive={props.isActive} onTransitionEnd={() => props.handleTransitionEnd(props.id)}>
-      <Pad isActive={props.isActive}>
-        <KeyboardKey className="text-gradient">{props.label}</KeyboardKey>
-      </Pad>
-    </PadRing>
-    <PadName>{props.padName}</PadName>
+    <Button
+      onClick={e => {
+        props.handleClick(props.id, e);
+      }}
+    >
+      <PadRing isActive={props.isActive} onTransitionEnd={e => props.handleTransitionEnd(props.id, e)}>
+        <Pad isActive={props.isActive}>
+          <KeyboardKey className="text-gradient">{props.label}</KeyboardKey>
+        </Pad>
+      </PadRing>
+      <PadName>{props.padName}</PadName>
+    </Button>
   </Column>
 );
 
