@@ -7,7 +7,9 @@ const Column = glamorous.div({
   width: '14.33%',
   marginLeft: '2%',
   display: 'flex',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexFlow: 'column nowrap'
 });
 
 const PadRing = glamorous.div(
@@ -65,8 +67,14 @@ const KeyboardKey = glamorous.kbd({
   }
 });
 
+const PadName = glamorous.div({
+  alignSelf: 'center',
+  color: '#585e45'
+});
+
 type Props = {
   label: string,
+  padName: string,
   id: string,
   isActive: boolean,
   handleTransitionEnd: (id: string) => void
@@ -81,6 +89,7 @@ const DrumPad = (props: Props) => (
         <KeyboardKey className="text-gradient">{props.label}</KeyboardKey>
       </Pad>
     </PadRing>
+    <PadName>{props.padName}</PadName>
   </Column>
 );
 

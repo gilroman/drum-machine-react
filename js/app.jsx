@@ -144,6 +144,7 @@ class App extends Component<{}, State> {
               key="65"
               id="65"
               label="A"
+              padName="Kick"
               isActive={this.state.pad65isActive}
               handleTransitionEnd={this.handleTransitionEnd}
             />
@@ -151,6 +152,7 @@ class App extends Component<{}, State> {
               key="83"
               id="83"
               label="S"
+              padName="Snare"
               isActive={this.state.pad83isActive}
               handleTransitionEnd={this.handleTransitionEnd}
             />
@@ -158,6 +160,7 @@ class App extends Component<{}, State> {
               key="68"
               id="68"
               label="D"
+              padName="Open Hat"
               isActive={this.state.pad68isActive}
               handleTransitionEnd={this.handleTransitionEnd}
             />
@@ -165,6 +168,7 @@ class App extends Component<{}, State> {
               key="74"
               id="74"
               label="J"
+              padName="Closed Hat"
               isActive={this.state.pad74isActive}
               handleTransitionEnd={this.handleTransitionEnd}
             />
@@ -172,6 +176,7 @@ class App extends Component<{}, State> {
               key="75"
               id="75"
               label="K"
+              padName="Cymbal"
               isActive={this.state.pad75isActive}
               handleTransitionEnd={this.handleTransitionEnd}
             />
@@ -179,6 +184,7 @@ class App extends Component<{}, State> {
               key="76"
               id="76"
               label="L"
+              padName="Clap"
               isActive={this.state.pad76isActive}
               handleTransitionEnd={this.handleTransitionEnd}
             />
